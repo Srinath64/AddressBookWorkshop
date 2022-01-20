@@ -19,7 +19,7 @@ public class AddressBookMain {
             System.out.println(" ---- MENU ----");
             System.out.println(" 1. Add contacts\n 2. Display contacts\n 3. Edit contacts\n 4. Delete contact\n"
                     + " 5. Add address book\n 6. Search for contact\n 7. View contacts by city or state\n"
-                    + " 8. Count contacts by city or state\n 9. Sort contacts by city/state/zip\n 10. Exit");
+                    + " 8. Count contacts by city or state\n 9. Sort contacts\n 10. File IO\n 11. Exit");
             System.out.print("\n Please enter your choice: ");
 
             ch = scan.next();
@@ -90,8 +90,23 @@ public class AddressBookMain {
                     adBook.sortContacts(sortAdBook, sortChoice);
                     break;
 
-
                 case "10":
+                    FileHandler file = new FileHandler();
+
+                    System.out.print(" Please enter to perform read or write: ");
+                    String fileOption = scan.next();
+
+                    if (fileOption.equalsIgnoreCase("read") || fileOption.equalsIgnoreCase("r"))
+                        file.readFromFile();
+                    else {
+                        System.out.print(" Please enter which address book to write: ");
+                        String adBookFile = scan.next();
+
+                        file.writeIntoFile(adBookFile, adBook);
+                    }
+                    break;
+
+                case "11":
                     System.out.println(" Good bye!");
                     return;
 
