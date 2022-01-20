@@ -157,4 +157,14 @@ public class AddressBookService {
         System.out.println(" Total count: " + finalCount);
     }
 
+    // Method to sort out contacts
+    public void sortContacts(String adBookName) {
+
+        AddressBook adBook = findAddressBook(adBookName);
+
+        adBook.addressBook.stream()
+                .sorted((contact1, contact2) -> contact1.getFirstName().compareToIgnoreCase(contact2.getFirstName()))
+                .forEach(contact -> System.out.println(contact));
+
+    }
 }
