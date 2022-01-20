@@ -23,8 +23,7 @@ public class AddressBookService {
 
     }
 
-    // Method to create a new address book in the hash map. Ensures that the names
-    // are unique
+    // Method to create a new address book in the hash map. Ensures that the names are unique
     public void addAddressBook() {
 
         System.out.println(" Please enter the name of the address book: ");
@@ -106,6 +105,20 @@ public class AddressBookService {
 
         adBook.displayContacts();
 
+    }
+    // Method to search all the addressbooks for a person in the corresponding city or state
+    public void searchCityState(String name, String location, String choice) {
+
+        addressBookRegistry.values().stream().forEach((adBook) -> {
+            adBook.addressBook.stream().filter(contact -> {
+
+                        if (choice.equalsIgnoreCase("city"))
+                            return contact.getCity().equalsIgnoreCase(location);
+                        else
+                            return contact.getState().equalsIgnoreCase(location);
+                    }).filter(contact -> contact.getFirstName().equalsIgnoreCase(name))
+                    .forEach(contact -> System.out.println(contact));
+        });
     }
 
 }

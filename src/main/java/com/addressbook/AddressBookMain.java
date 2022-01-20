@@ -18,7 +18,7 @@ public class AddressBookMain {
         while (true) {
             System.out.println(" ---- MENU ----");
             System.out.println(" 1. Add contacts\n 2. Display contacts\n 3. Edit contacts\n 4. Delete contact\n"
-                    + " 5. Add address book\n 6. Exit");
+                    + " 5. Add address book\n 6. Search for contact\n 7. Exit");
             System.out.print("\n Please enter your choice: ");
 
             ch = scan.next();
@@ -46,6 +46,18 @@ public class AddressBookMain {
                     break;
 
                 case "6":
+                    System.out.print(" Please enter the name of the contact you want to find: ");
+                    String name = scan.next();
+
+                    System.out.print(" Please enter to search by city or state(city/state): ");
+                    String choice = scan.next();
+
+                    System.out.print(" Please enter the location: ");
+                    String location = scan.next();
+
+                    adBook.searchCityState(name, location, choice);
+
+                case "7":
                     System.out.println(" Good bye!");
                     return;
 

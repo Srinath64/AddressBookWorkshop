@@ -55,7 +55,7 @@ public class AddressBook {
     // Method to add objects of Contact class to address book arraylist
     public void addContact() {
 
-        System.out.println(" Please enter how many contacts you want to add: ");
+        System.out.print(" Please enter how many contacts you want to add: ");
         int n = scan.nextInt();
 
         for (int i = 0; i < n; i++) {
@@ -90,7 +90,6 @@ public class AddressBook {
     }
 
     //Method to delete contact
-
     public void deleteContact() {
 
         Contact contact = findContact();
@@ -105,7 +104,7 @@ public class AddressBook {
 
     }
 
-    // Method to edit contacts
+    // Method to edit contacts.
     public void editContact() {
 
         Contact contact = findContact();
