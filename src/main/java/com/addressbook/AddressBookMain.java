@@ -84,7 +84,12 @@ public class AddressBookMain {
                     System.out.print(" Please enter which address book to sort: ");
                     String sortAdBook = scan.next();
 
-                    adBook.sortContacts(sortAdBook);
+                    System.out.print(" Please enter to sort by name, city, state or zip: ");
+                    String sortChoice = scan.next();
+
+                    adBook.sortContacts(sortAdBook, sortChoice);
+                    break;
+
 
                 case "10":
                     System.out.println(" Good bye!");
