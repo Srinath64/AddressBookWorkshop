@@ -137,4 +137,24 @@ public class AddressBookService {
         });
     }
 
+    // Method to count all contacts in a given state or city across all address books
+    public void countContact(String location, String choice) {
+
+        int finalCount = 0;
+
+        for (AddressBook adBook : addressBookRegistry.values()) {
+
+            finalCount += adBook.addressBook.stream()
+                    .filter(contact -> {
+                        if (choice.equalsIgnoreCase("city"))
+                            return contact.getCity().equalsIgnoreCase(location);
+                        else
+                            return contact.getState().equalsIgnoreCase(location);
+                    })
+                    .count();
+        }
+
+        System.out.println(" Total count: " + finalCount);
+    }
+
 }
