@@ -5,10 +5,13 @@ import java.util.ArrayList;
 
 public class AddressBook {
 
+    // Arraylist of contact class type. This is the addressbook
     public static ArrayList<Contact> addressBook = new ArrayList<Contact>();
 
+    Scanner scan = new Scanner(System.in);
+
+    // Read all the value of contact and create an object and return said object
     public Contact inputDetails() {
-        Scanner scan = new Scanner(System.in);
 
         System.out.print(" Please enter the first name: ");
         String firstName = scan.next();
@@ -42,6 +45,7 @@ public class AddressBook {
 
     }
 
+    // Display all the contacts in the address book arraylist
     public void displayContacts() {
 
         for (Contact contact : addressBook) {
@@ -52,14 +56,18 @@ public class AddressBook {
     // Method to create an object of Contact class with user input
     public void addContact() {
 
-        addressBook.add(inputDetails());
+        System.out.println(" Please enter how many contacts you want to add: ");
+        int n = scan.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            addressBook.add(inputDetails());
+            System.out.println();
+        }
 
     }
 
     // Method to find a contact via name in the address book arraylist
     public int findContact() {
-
-        Scanner scan = new Scanner(System.in);
 
         System.out.print(" Please enter the first name: ");
         String firstName = scan.next();
@@ -74,6 +82,7 @@ public class AddressBook {
 
     }
 
+    //Method to delete contact. We search for the contact by name
     public void deleteContact() {
 
         int index = findContact();
@@ -88,6 +97,7 @@ public class AddressBook {
 
     }
 
+    // Method to edit contacts. We read all the parameters for that contact and then set into the array list
     public void editContact() {
 
         int index = findContact();
@@ -99,5 +109,6 @@ public class AddressBook {
 
         System.out.println(" Contact found! Please enter new details of the contact");
         addressBook.set(index, inputDetails());
+
     }
 }
