@@ -119,10 +119,17 @@ public class AddressBookMain {
                             file.writeCSVFile(adBookFile, adBook);
                         }
                     }
+                    else if (fileFormatOption.equalsIgnoreCase("json")) {
+                        if (fileOption.equalsIgnoreCase("read") || fileOption.equalsIgnoreCase("r"))
+                            file.readJSONFile();
+                        else {
+                            System.out.print(" Please enter which address book to write: ");
+                            String adBookFile = scan.next();
 
-
+                            file.writeJSONFile(adBookFile, adBook);
+                        }
+                    }
                     break;
-
 
                 case "11":
                     System.out.println(" Good bye!");

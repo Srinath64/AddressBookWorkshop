@@ -1,5 +1,7 @@
 package com.addressbook;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
@@ -82,4 +84,38 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
+
+    // Method to write address book into json file
+    public void writeJSONFile(String adBookName, AddressBookService adBookHandler) {
+
+        AddressBook adBook = adBookHandler.findAddressBook(adBookName);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String output = gson.toJson(adBook.addressBook);
+
+        try {
+            FileWriter fw = new FileWriter("src/main/resources/AddressBook.json");
+            fw.write(output);
+            fw.close();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
+    // Method to read address book data from json file
+    public void readJSONFile() {
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            FileReader fr = new FileReader("src/main/resources/AddressBook.json");
+
+            System.out.println(gson.fromJson(fr, Object.class));
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 }
