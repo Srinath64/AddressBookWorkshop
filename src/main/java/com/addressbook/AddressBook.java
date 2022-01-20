@@ -1,12 +1,12 @@
 package com.addressbook;
 
+import java.util.HashSet;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class AddressBook {
 
-    // Arraylist of contact class type. This is the addressbook
-    public static ArrayList<Contact> addressBook = new ArrayList<Contact>();
+    // Hashset of contact class type. This is the addressbook
+    public HashSet<Contact> addressBook = new HashSet<Contact>();
 
     Scanner scan = new Scanner(System.in);
 
@@ -37,8 +37,7 @@ public class AddressBook {
         System.out.print(" Please enter the email: ");
         String email = scan.next();
 
-        // Creating a new object of the contact class with the parameter values filled
-        // by user
+        // Creating a new object of the contact class with the parameter values filled by user
         Contact contact = new Contact(firstName, lastName, address, city, state, zip, phone, email);
 
         return contact;
@@ -53,62 +52,72 @@ public class AddressBook {
         }
     }
 
-    // Method to create an object of Contact class with user input
+    // Method to add objects of Contact class to address book arraylist
     public void addContact() {
 
         System.out.println(" Please enter how many contacts you want to add: ");
         int n = scan.nextInt();
 
         for (int i = 0; i < n; i++) {
-            addressBook.add(inputDetails());
+
+            Contact newContact = inputDetails();
+
+            if (!addressBook.add(newContact)) {
+                System.out.println(" ERROR: A contact of this name already exists!");
+                i--;
+                continue;
+            }
+
             System.out.println();
         }
 
     }
 
     // Method to find a contact via name in the address book arraylist
-    public int findContact() {
+    public Contact findContact() {
 
         System.out.print(" Please enter the first name: ");
         String firstName = scan.next();
 
         for (Contact contact : addressBook) {
             if (firstName.compareToIgnoreCase(contact.getFirstName()) == 0) {
-                return addressBook.indexOf(contact);
+                return contact;
             }
         }
 
-        return -1;
+        return null;
 
     }
 
-    //Method to delete contact. We search for the contact by name
+    //Method to delete contact
+
     public void deleteContact() {
 
-        int index = findContact();
+        Contact contact = findContact();
 
-        if (index == -1) {
+        if (contact == null) {
             System.out.println(" ERROR: No such contact");
             return;
         }
 
-        addressBook.remove(index);
+        addressBook.remove(contact);
         System.out.println(" Contact deleted!");
 
     }
 
-    // Method to edit contacts. We read all the parameters for that contact and then set into the array list
+    // Method to edit contacts
     public void editContact() {
 
-        int index = findContact();
+        Contact contact = findContact();
 
-        if (index == -1) {
+        if (contact == null) {
             System.out.println(" ERROR: No such contact");
             return;
         }
 
         System.out.println(" Contact found! Please enter new details of the contact");
-        addressBook.set(index, inputDetails());
+        addressBook.remove(contact);
+        addressBook.add(inputDetails());
 
     }
 }
