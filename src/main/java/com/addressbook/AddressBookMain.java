@@ -96,15 +96,33 @@ public class AddressBookMain {
                     System.out.print(" Please enter to perform read or write: ");
                     String fileOption = scan.next();
 
-                    if (fileOption.equalsIgnoreCase("read") || fileOption.equalsIgnoreCase("r"))
-                        file.readFromFile();
-                    else {
-                        System.out.print(" Please enter which address book to write: ");
-                        String adBookFile = scan.next();
+                    System.out.print(" Please enter which format to operate in (txt/csv/json): ");
+                    String fileFormatOption = scan.next();
 
-                        file.writeIntoFile(adBookFile, adBook);
+                    if (fileFormatOption.equalsIgnoreCase("txt")) {
+                        if (fileOption.equalsIgnoreCase("read") || fileOption.equalsIgnoreCase("r"))
+                            file.readFromFile();
+                        else {
+                            System.out.print(" Please enter which address book to write: ");
+                            String adBookFile = scan.next();
+
+                            file.writeIntoFile(adBookFile, adBook);
+                        }
                     }
+                    else if (fileFormatOption.equalsIgnoreCase("csv")) {
+                        if (fileOption.equalsIgnoreCase("read") || fileOption.equalsIgnoreCase("r"))
+                            file.readCSVFile();
+                        else {
+                            System.out.print(" Please enter which address book to write: ");
+                            String adBookFile = scan.next();
+
+                            file.writeCSVFile(adBookFile, adBook);
+                        }
+                    }
+
+
                     break;
+
 
                 case "11":
                     System.out.println(" Good bye!");
